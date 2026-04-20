@@ -1,6 +1,6 @@
 # CMPM120-D1-Cinematic
 
-This cinematic demonstrates the intro for my game: Wonhyo
+This cinematic demonstrates the intro for my game: Wonhyo, The monk that could deflect it all!
 
 ---------------------------------------------------------
 
