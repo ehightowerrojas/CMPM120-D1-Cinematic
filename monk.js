@@ -115,35 +115,49 @@ class monk extends Phaser.Scene {
         })
         //--Letters_Falling_End--//
 
-        //--Monk_Praying--//
-        this.pm = this.add.image(675, 423, 'PrayingMonk');
-        this.pm.scale = 1.2;
-        this.pm.alpha = 0;
+        //--Three_Monk_Praying--//
+        this.pm2 = this.add.image(500, 423, 'PrayingMonk');
+        this.pm3 = this.add.image(850, 423, 'PrayingMonk');
+        this.pm1 = this.add.image(675, 423, 'PrayingMonk');
+        this.pm1.alpha = 0;
+        this.pm2.alpha = 0;
+        this.pm3.alpha = 0;
 
         this.tweens.add({
-            targets: this.pm,
+            targets: this.pm1,
             y: 400,
-            scale: 1.5,
+            scale: 1.3,
             alpha: 1,
             duration: 4700,
             delay: 9500,
             ease: 'EaseIn'
         });
 
-        let SecondPhrase = this.add.text(215, 300, "There lived a monk",  { fontSize: '50px' });
+        this.tweens.add({
+            targets: [this.pm2, this.pm3],
+            y: 400,
+            scale: 1.1,
+            alpha: .80,
+            duration: 4700,
+            delay: 9500,
+            ease: 'EaseIn'
+        });
+
+        let SecondPhrase = this.add.text(260, 100, "There lived a clan of monks",  { fontSize: '50px' });
         SecondPhrase.setColor('#000000');
         SecondPhrase.alpha = 0;
 
         this.tweens.add({
             targets: SecondPhrase,
-            y: 445,
+            y: 65,
             alpha: 1,
-            scale: 1.2,
-            duration: 5000,
+            scale: 1.05,
+            duration: 4200,
             delay: 9500,
             ease: 'EaseIn'
         });
 
+        //Background_Zoom
         this.tweens.add({
             targets: this.b,
             displayWidth: 4050,
@@ -152,7 +166,9 @@ class monk extends Phaser.Scene {
             delay: 9050,
             ease: 'EaseOut'
         })
-        //--Monk_Praying_End--//
+        //--three_Monk_Praying_End--//
+
+        //Next idea: monk moves to the right and the two behind him move to the left, then text appears, "but one stood out from the rest of the crowd, that monks name was wonhyo etc"
 
         console.log("hi hehe :)");
     }
