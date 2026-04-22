@@ -10,15 +10,15 @@ class monk extends Phaser.Scene {
 
         //--Intro--//
         //Background 
-        let b = this.add.image(675, 300, 'Background');
-        b.displayWidth = 1300;
+        this.b = this.add.image(675, 300, 'Background');
+        this.b.displayWidth = 1350;
 
         //Moving Pen//
         this.p = this.add.image(400, 185, 'Pen');
 
         this.tweens.add({
             targets: this.p,
-            y: 175,               
+            y: 169,               
             duration: 3500,       
             ease: 'Bounce',
             yoyo: true           
@@ -97,10 +97,10 @@ class monk extends Phaser.Scene {
         });
         //--Intro_End--//
 
-        //--Zoom_To_Suspense--//
+        //--Letters_Falling--//
         this.tweens.add({
-            targets: [IntroText1, IntroText2, IntroText3, IntroText4, IntroText5, IntroText6, this.p],
-            scale: 1.5,
+            targets: [IntroText1, IntroText2, IntroText3, IntroText4, IntroText5, IntroText6],
+            scale: 1.25,
             duration: 30000,
             delay: 9000,
             ease: 'Power2'
@@ -113,20 +113,46 @@ class monk extends Phaser.Scene {
             delay: 9000,
             ease: 'Linear'
         })
-        //--New_Scene--//
-        let BodyText = this.add.text(215, 300, "That monk's name",  { fontSize: '50px' });
-        BodyText.setColor('#000000');
-        BodyText.alpha = 0;
+        //--Letters_Falling_End--//
+
+        //--Monk_Praying--//
+        this.pm = this.add.image(675, 423, 'PrayingMonk');
+        this.pm.scale = 1.2;
+        this.pm.alpha = 0;
 
         this.tweens.add({
-            targets: BodyText,
+            targets: this.pm,
+            y: 400,
+            scale: 1.5,
             alpha: 1,
-            scale: 1.3,
-            duration: 2000,
-            delay: 11000,
+            duration: 4700,
+            delay: 9500,
+            ease: 'EaseIn'
+        });
+
+        let SecondPhrase = this.add.text(215, 300, "There lived a monk",  { fontSize: '50px' });
+        SecondPhrase.setColor('#000000');
+        SecondPhrase.alpha = 0;
+
+        this.tweens.add({
+            targets: SecondPhrase,
+            y: 445,
+            alpha: 1,
+            scale: 1.2,
+            duration: 5000,
+            delay: 9500,
+            ease: 'EaseIn'
+        });
+
+        this.tweens.add({
+            targets: this.b,
+            displayWidth: 4050,
+            displayHeight: 2500,
+            duration: 5450,
+            delay: 9050,
             ease: 'EaseOut'
         })
-
+        //--Monk_Praying_End--//
 
         console.log("hi hehe :)");
     }
