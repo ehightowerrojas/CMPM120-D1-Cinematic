@@ -369,8 +369,8 @@ class monk extends Phaser.Scene {
             delay: 31300
         });
 
-        let Music1 = this.sound.add('Music');
-        let Music2 = this.sound.add('Twinkle');
+        let Music1 = this.sound.add('Music', { loop: false });
+        let Music2 = this.sound.add('Twinkle', { loop: false });
         Music1.play();
         Music2.play();
 
