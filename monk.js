@@ -3,7 +3,12 @@ class monk extends Phaser.Scene {
         // 'sky' is the key we use to refer to this image later
         this.load.image('Background', 'assets/Background.jpg');
         this.load.image('PrayingMonk', 'assets/PrayingMonk.png');
-        this.load.image('Pen', 'assets/Pen.png')
+        this.load.image('AwesomeMonk', 'assets/AwesomeMonk.png');
+        this.load.image('Wonhyo', 'assets/Wonhyo.png');
+        this.load.image('FBackground', 'assets/FinalBackground.jpg');
+        this.load.image('Pen', 'assets/Pen.png');
+        this.load.audio('Music', 'assets/music.mp3');
+        this.load.image('Arrow', 'assets/Arrow.png');
     }
 
     create() {
@@ -95,9 +100,9 @@ class monk extends Phaser.Scene {
             delay: 7100,
             ease: 'Linear'
         });
-        //--Intro_End--//
+        //--Intro End--//
 
-        //--Letters_Falling--//
+        //--Letters Falling--//
         this.tweens.add({
             targets: [IntroText1, IntroText2, IntroText3, IntroText4, IntroText5, IntroText6],
             scale: 1.25,
@@ -112,10 +117,11 @@ class monk extends Phaser.Scene {
             duration: 9000,
             delay: 9000,
             ease: 'Linear'
-        })
-        //--Letters_Falling_End--//
+        });
+        //--Letters Falling End--//
 
-        //--Three_Monk_Praying--//
+        //--Three Monk Praying--//
+        //Monks Praying
         this.pm2 = this.add.image(500, 423, 'PrayingMonk');
         this.pm3 = this.add.image(850, 423, 'PrayingMonk');
         this.pm1 = this.add.image(675, 423, 'PrayingMonk');
@@ -143,7 +149,8 @@ class monk extends Phaser.Scene {
             ease: 'EaseIn'
         });
 
-        let SecondPhrase = this.add.text(260, 100, "There lived a clan of monks",  { fontSize: '50px' });
+        //Second Phrase
+        let SecondPhrase = this.add.text(295, 100, "There lived a clan of monks",  { fontSize: '50px' });
         SecondPhrase.setColor('#000000');
         SecondPhrase.alpha = 0;
 
@@ -151,13 +158,13 @@ class monk extends Phaser.Scene {
             targets: SecondPhrase,
             y: 65,
             alpha: 1,
-            scale: 1.05,
-            duration: 4200,
+            scale: .92,
+            duration: 4700,
             delay: 9500,
             ease: 'EaseIn'
         });
 
-        //Background_Zoom
+        //Background Zoom
         this.tweens.add({
             targets: this.b,
             displayWidth: 4050,
@@ -165,10 +172,204 @@ class monk extends Phaser.Scene {
             duration: 5450,
             delay: 9050,
             ease: 'EaseOut'
-        })
-        //--three_Monk_Praying_End--//
+        });
+        //--Three Monk Praying End--//
 
-        //Next idea: monk moves to the right and the two behind him move to the left, then text appears, "but one stood out from the rest of the crowd, that monks name was wonhyo etc"
+        //--Iso Monk--//
+        //Iso Phrase
+        let IsoPhrase = this.add.text(15, 240, "But there was always one that\nstood out among the rest...", { fontSize: '39px'});
+        IsoPhrase.setColor('#000000');
+        IsoPhrase.alpha = 0;
+
+        this.tweens.add({
+            targets: IsoPhrase,
+            x: 40,
+            alpha: 1,
+            scale: 1.05,
+            duration: 2300,
+            delay: 17000,
+            ease: 'EaseIn'
+        });
+
+        //Iso Monk
+        this.tweens.add({
+            targets: SecondPhrase,
+            x: -1200,
+            alpha: 0,
+            duration: 2300,
+            delay: 17000,
+            ease: 'EaseIn'
+
+        })
+        this.tweens.add({
+            targets: this.pm1,
+            x: 1000,
+            scale: 1.6,
+            duration: 2300,
+            delay: 17000,
+            ease: 'EaseIn'
+        });
+
+        this.tweens.add({
+            targets: [this.pm2, this.pm3],
+            x: -200,
+            alpha: 0,
+            duration: 2050,
+            delay: 17000,
+            ease: 'EaseIn'
+        });
+        //--Iso Monk End--//
+
+        //--Awesome Background--//
+        this.bb = this.add.rectangle(675, -350, 25, 700, 0x000000);
+
+        this.tweens.add({
+            targets: this.bb,
+            y: 300,
+            duration: 800,
+            delay: 21500
+        });
+
+        this.tweens.add({
+            targets: this.bb,
+            displayWidth: 1350,
+            duration: 900,
+            delay: 22300
+
+        });
+
+        //Monk Transition lol
+        this.ab = this.add.image(675, 300, 'AwesomeMonk');
+        this.ab.alpha = 0;
+
+        this.tweens.add({
+            targets: this.ab,
+            alpha: 1,
+            duration: 1800,
+            delay: 23100
+
+        });
+
+        let AmazingPhrase = this.add.text(150, 15, "He was a monk of amazing discipline and power", { fontSize: '39px'});
+        AmazingPhrase.alpha = 0;   
+
+        this.tweens.add({
+            targets: AmazingPhrase,
+            alpha: 1,
+            duration: 2300,
+            delay: 23100,
+            ease: 'EaseIn'
+        });
+        //--Awesome Background End--//
+
+        //--Build Up Moment--//
+        this.tweens.add({
+            targets: [AmazingPhrase, this.ab],
+            x: 675,
+            y: 300,
+            scale: 0,
+            duration: 2500,
+            delay: 25600,
+            ease: 'EaseIn'  
+        });
+
+        let MomentPhrase = this.add.text(-10, 270, "This is the story of...", { fontSize: '75px'});
+        MomentPhrase.alpha = 0;
+        MomentPhrase.scale = 1.5;
+
+        this.tweens.add({
+            targets: MomentPhrase,
+            x: 150,
+            scale: 1,
+            alpha: 1,
+            duration: 2500,
+            delay: 25600,
+            ease: 'EaseIn'
+        });
+        //--Build Up Moment End--//
+
+        //--Wonhyo Screen--//
+        this.f = this.add.image(675, 300, 'FBackground');
+
+        this.tweens.add({
+            targets: MomentPhrase,
+            x: -1100,
+            duration: 1000,
+            delay: 30000
+        });
+
+        this.w = this.physics.add.image(1550, 300, 'Wonhyo');
+        this.w.body.setAllowGravity(false);
+        this.w.scale = 1.3;
+
+        this.tweens.add({
+            targets: this.w,
+            x: 675,
+            duration: 1000,
+            delay: 30000
+        });
+
+        this.bbb = this.add.rectangle(-675, 385, 1350, 65, 0x000000);
+        this.bbb.alpha = 0.65;
+
+        this.tweens.add({
+            targets: this.bbb,
+            x: 675,
+            duration: 1000,
+            delay: 31200,
+            ease: 'Power2'
+        });
+
+        let FinalPhrase = this.add.text(1700, 370, "The monk that could deflect it all!", { fontSize: '30px'});
+        FinalPhrase.alpha = 0;
+
+        this.tweens.add({
+            targets: FinalPhrase,
+            x: 350,
+            alpha: 1,
+            duration: 1000,
+            delay: 31200,
+            ease: 'Power2'
+        });   
+
+        this.f.displayWidth = 1350;
+        this.f.displayHeight = 600;
+        this.f.alpha = 0;
+
+        this.tweens.add({
+            targets: this.f,
+            alpha: .75,
+            duration: 1000,
+            delay: 31300
+        });
+
+        let Music = this.sound.add('Music');
+        Music.play();
+
+        //Arrow Deflect Stuff
+        this.a = this.physics.add.image(-675, -300, 'Arrow');
+        this.a.body.setAllowGravity(false);
+        this.a.scale = 0.2;
+        this.a.setAngle(30)
+
+        this.tweens.add({
+            targets: this.a,
+            x: 675,
+            y: 300,
+            duration: 500,
+            delay: 31800
+        });
+
+        this.physics.add.overlap(this.w, this.a, (obj1, obj2) => {
+            // obj1 is the first argument (player)
+            // obj2 is the second argument (enemy)
+            obj2.destroy(); // Removes the enemy from the game and physics world
+        }, null, this);
+
+
+
+
+        //--Wonhyo Screen End--//
 
         console.log("hi hehe :)");
     }
@@ -184,6 +385,15 @@ const config = {
     type: Phaser.AUTO,
     width: 1350,
     height: 600,
+    physics: {
+        default: 'arcade', // This must be set to 'arcade'
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+
     scene: monk
+
 };
 const game = new Phaser.Game(config);
