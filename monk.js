@@ -8,15 +8,34 @@ class monk extends Phaser.Scene {
         this.load.image('FBackground', 'assets/FinalBackground.jpg');
         this.load.image('Pen', 'assets/Pen.png');
         this.load.audio('Music', 'assets/music.mp3');
+        this.load.audio('Twinkle', 'assets/twinkle.mp3');
         this.load.image('Arrow', 'assets/Arrow.png');
     }
 
     create() {
 
         //--Intro--//
-        //Background 
+        //Background & Music Player
         this.b = this.add.image(675, 300, 'Background');
         this.b.displayWidth = 1350;
+        
+        const muh = this.add.container(0, 0);
+        this.mu = this.add.rectangle(220, 464, 500, 45, 0x000000);
+        let MusicStart = this.add.text(17, 450, 'Click Anywhere for Music', { fontSize: '30px'});
+
+
+        muh.add([this.mu, MusicStart])
+        
+        this.input.on('pointerdown', (pointer) => {
+            console.log('click');
+            this.tweens.add({
+                targets: muh,
+                x: -500,
+                duration: 900,
+                ease: 'Linear'
+            });
+        });
+  
 
         //Moving Pen//
         this.p = this.add.image(400, 185, 'Pen');
@@ -30,7 +49,7 @@ class monk extends Phaser.Scene {
         });
         
         //Fading Intro Text//
-        let IntroText1 = this.add.text(195, 253, 'A',  { fontSize: '50px' });
+        let IntroText1 = this.add.text(195, 253, 'A', { fontSize: '50px' });
         IntroText1.setColor('#000000');
         IntroText1.alpha = 0;
 
@@ -274,11 +293,18 @@ class monk extends Phaser.Scene {
         });
 
         let MomentPhrase = this.add.text(-10, 270, "This is the story of...", { fontSize: '75px'});
+        let MomentPhrase2 = this.add.text(-30, 270, "This is the story of...", { fontSize: '75px'});
+        let MomentPhrase3 = this.add.text(-70, 270, "This is the story of...", { fontSize: '75px'});
         MomentPhrase.alpha = 0;
+        MomentPhrase2.alpha = 0;
+        MomentPhrase3.alpha = 0;
         MomentPhrase.scale = 1.5;
+        MomentPhrase2.scale = 1.3;
+        MomentPhrase3.scale = 1.1;
+
 
         this.tweens.add({
-            targets: MomentPhrase,
+            targets: [MomentPhrase, MomentPhrase2, MomentPhrase3],
             x: 150,
             scale: 1,
             alpha: 1,
@@ -292,15 +318,15 @@ class monk extends Phaser.Scene {
         this.f = this.add.image(675, 300, 'FBackground');
 
         this.tweens.add({
-            targets: MomentPhrase,
+            targets: [MomentPhrase, MomentPhrase2, MomentPhrase3],
             x: -1100,
             duration: 1000,
             delay: 30000
         });
 
-        this.w = this.physics.add.image(1550, 300, 'Wonhyo');
+        this.w = this.physics.add.image(1600, 300, 'Wonhyo');
         this.w.body.setAllowGravity(false);
-        this.w.scale = 1.3;
+        this.w.scale = 1.8;
 
         this.tweens.add({
             targets: this.w,
@@ -343,31 +369,49 @@ class monk extends Phaser.Scene {
             delay: 31300
         });
 
-        let Music = this.sound.add('Music');
-        Music.play();
+        let Music1 = this.sound.add('Music');
+        let Music2 = this.sound.add('Twinkle');
+        Music1.play();
+        Music2.play();
 
-        //Arrow Deflect Stuff
-        this.a = this.physics.add.image(-675, -300, 'Arrow');
-        this.a.body.setAllowGravity(false);
-        this.a.scale = 0.2;
-        this.a.setAngle(30)
+        //Arrow Deflect Stuff//
+        this.a1 = this.physics.add.image(-675, -300, 'Arrow');
+        this.a2 = this.physics.add.image(675, 300, 'Arrow');
+        this.a1.scale = 0.2;
+        this.a2.scale = 0.2;
+        this.a1.body.setAllowGravity(false);
+        this.a2.body.setAllowGravity(false);
+        this.a1.setAngle(30);
+        this.a2.setAngle(-40);
+        this.a2.alpha = 0;
 
         this.tweens.add({
-            targets: this.a,
+            targets: this.a1,
             x: 675,
             y: 300,
             duration: 500,
             delay: 31800
         });
 
-        this.physics.add.overlap(this.w, this.a, (obj1, obj2) => {
-            // obj1 is the first argument (player)
-            // obj2 is the second argument (enemy)
-            obj2.destroy(); // Removes the enemy from the game and physics world
+        this.tweens.add({
+            targets: this.a2,
+            alpha: 1,
+            duration: 0,
+            delay: 32300
+        });
+
+        this.tweens.add({
+            targets: this.a2,
+            x: 1100,
+            y: -300,
+            setAngle: -40,
+            duration: 500,
+            delay: 32301
+        });
+
+        this.physics.add.overlap(this.w, this.a1, (obj1, obj2) => {
+            obj2.destroy();
         }, null, this);
-
-
-
 
         //--Wonhyo Screen End--//
 
