@@ -48,7 +48,7 @@ class monk extends Phaser.Scene {
             yoyo: true           
         });
         
-        //Fading Intro Text//
+        //Fading Intro Text
         let IntroText1 = this.add.text(195, 253, 'A', { fontSize: '50px' });
         IntroText1.setColor('#000000');
         IntroText1.alpha = 0;
@@ -196,7 +196,7 @@ class monk extends Phaser.Scene {
 
         //--Iso Monk--//
         //Iso Phrase
-        let IsoPhrase = this.add.text(15, 240, "But there was always one that\nstood out among the rest...", { fontSize: '39px'});
+        let IsoPhrase = this.add.text(45, 240, "But there was always one that\nstood out among the rest...", { fontSize: '39px Georgia'});
         IsoPhrase.setColor('#000000');
         IsoPhrase.alpha = 0;
 
@@ -292,9 +292,9 @@ class monk extends Phaser.Scene {
             ease: 'EaseIn'  
         });
 
-        let MomentPhrase = this.add.text(-10, 270, "This is the story of...", { fontSize: '75px'});
-        let MomentPhrase2 = this.add.text(-30, 270, "This is the story of...", { fontSize: '75px'});
-        let MomentPhrase3 = this.add.text(-70, 270, "This is the story of...", { fontSize: '75px'});
+        let MomentPhrase = this.add.text(-10, 270, "This is the story of...", { fontSize: '75px Georgia'});
+        let MomentPhrase2 = this.add.text(-30, 270, "This is the story of...", { fontSize: '75px Georgia'});
+        let MomentPhrase3 = this.add.text(-70, 270, "This is the story of...", { fontSize: '75px Georgia'});
         MomentPhrase.alpha = 0;
         MomentPhrase2.alpha = 0;
         MomentPhrase3.alpha = 0;
@@ -376,7 +376,7 @@ class monk extends Phaser.Scene {
 
         //Arrow Deflect Stuff//
         this.a1 = this.physics.add.image(-675, -300, 'Arrow');
-        this.a2 = this.physics.add.image(675, 300, 'Arrow');
+        this.a2 = this.physics.add.image(675, 250, 'Arrow');
         this.a1.scale = 0.2;
         this.a2.scale = 0.2;
         this.a1.body.setAllowGravity(false);
@@ -436,6 +436,7 @@ const config = {
             debug: false
         }
     },
+    parent: "root",
 
     scene: monk
 
