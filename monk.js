@@ -315,7 +315,7 @@ class monk extends Phaser.Scene {
         //--Build Up Moment End--//
 
         //--Wonhyo Screen--//
-        this.f = this.add.image(675, 300, 'FBackground');
+        this.f = this.add.image(675, 275, 'FBackground');
 
         this.tweens.add({
             targets: [MomentPhrase, MomentPhrase2, MomentPhrase3],
@@ -359,7 +359,7 @@ class monk extends Phaser.Scene {
         });   
 
         this.f.displayWidth = 1350;
-        this.f.displayHeight = 600;
+        this.f.displayHeight = 650;
         this.f.alpha = 0;
 
         this.tweens.add({
@@ -368,6 +368,18 @@ class monk extends Phaser.Scene {
             duration: 1000,
             delay: 31300
         });
+
+        this.tweens.add({
+            targets: this.f,
+            y: 325,
+            duration: 1500,
+            delay: 32300,
+            yoyo: true,
+            repeat: -1
+        });
+
+
+
 
         let Music1 = this.sound.add('Music', { loop: false });
         let Music2 = this.sound.add('Twinkle', { loop: false });
